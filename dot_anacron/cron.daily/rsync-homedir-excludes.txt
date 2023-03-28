@@ -431,3 +431,20 @@ go/pkg/mod/cache
 
 # SC-Controller - socket file
 .config/scc/daemon.socket
+
+# AUR Local Repo
+aur*
+
+# Flatpak
+.var/app*
+
+# Python virtual environments
+.venv
+mcprep_venv_*
+
+# Librewolf
+.librewolf
+
+# Compiled language stuff
+target/
+go/

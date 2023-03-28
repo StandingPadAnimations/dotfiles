@@ -14,7 +14,7 @@ vim.g.loaded_netrwPlugin = 1
 
 packer = require 'packer'
 packer.init {
-  max_jobs = 10
+  max_jobs = 5
 }
 
 -- stylua: ignore start
@@ -460,6 +460,8 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
-
+luasnip.config.set_config {
+  region_check_events = 'InsertEnter'
+}
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
