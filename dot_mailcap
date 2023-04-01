@@ -1,0 +1,2 @@
+text/html; links -dump %s -codepage utf-8; nametemplate=%s.html; copiousoutput
+image/*; imv %s
