@@ -1,23 +1,27 @@
 auto_view text/html
 alternative_order text/plain text/enriched text/html
-set ssl_starttls=no
-set ssl_force_tls=no
-set send_charset="us-ascii:utf-8"
+set ssl_starttls = yes
+set ssl_force_tls = yes
+set send_charset = "us-ascii:utf-8"
 
-# IMAP
-set imap_user = "mahidsheikh"
-set imap_pass = `pass Email/hydroxide` 
-set folder ="imap://localhost:1143/"
-set spoolfile = "imap://localhost:1143/INBOX"
-set postponed = "imap://localhost:1143/[Protonmail]/Drafts"
-set mbox = "imap://localhost:1143/[Protonmail]/All Mail"
+set imap_user = "mahidsheikh@proton.me"
+set imap_pass = `pass mahidsheikh@proton.me`
+set imap_authenticators = login
 
-# SMTP
-set smtp_pass = `pass Email/hydroxide`
-set smtp_url = "smtp://mahidsheikh@localhost:1025/"
+set smtp_pass = `pass mahidsheikh@proton.me`
+set smtp_url = "smtp://$imap_user:$imap_pass127.0.0.1:1025"
+set smtp_authenticators = "gssapi:login"
+
+set folder = "imap://127.0.0.1:1143"
+set spoolfile = "imap://127.0.0.1:1143/INBOX"
+set postponed = "imap://127.0.0.1:1143/[Protonmail]/Drafts"
+set mbox = "imap://127.0.0.1:1143/[Protonmail]/All Mail"
+set imap_keepalive = 900
+
+set certificate_file = "~/.mutt/certificates"
 set from = "Mahid Sheikh <mahidsheikh@proton.me>"
-set edit_headers=yes
-set use_envelope_from = yes
+set use_from = yes
+unset use_domain
 
 bind index g  noop
 macro index gd "<change-folder>$postponed<enter>" "go to drafts"
