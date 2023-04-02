@@ -9,7 +9,7 @@ set imap_pass = `pass mahidsheikh@proton.me`
 set imap_authenticators = login
 
 set smtp_pass = `pass mahidsheikh@proton.me`
-set smtp_url = "smtp://$imap_user:$imap_pass127.0.0.1:1025"
+set smtp_url = "smtp://$imap_user:$imap_pass@127.0.0.1:1025"
 set smtp_authenticators = "gssapi:login"
 
 set folder = "imap://127.0.0.1:1143"
