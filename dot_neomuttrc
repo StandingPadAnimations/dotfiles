@@ -33,7 +33,7 @@ macro index,pager A "<save-message> =Archive<enter> "archive message"
 
 
 # Some extra stuff
-set editor=nvim
+set editor="nvim"
 set status_format = "%f"
 set date_format = "%m%d"
 set index_format = "%Z %D %-15.15n %s"
