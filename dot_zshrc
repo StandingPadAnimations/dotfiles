@@ -109,7 +109,7 @@ alias ls-all="lsd --all"
 alias cat="bat"
 alias cd="z"
 alias grep="rg"
-alias yeet="doas pacman -Rs"
+alias yeet="sudo pacman -Rs"
 alias mutt="neomutt"
 
 [ "$TERM" = "xterm-256color" ]
