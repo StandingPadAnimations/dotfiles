@@ -130,3 +130,4 @@ eval "$(register-python-argcomplete pipx)"
 eval "$(thefuck --alias)"
 # Created by `pipx` on 2023-03-27 22:10:14
 export PATH="$PATH:/home/mahid/.local/bin"
+eval "$(luarocks path)"
