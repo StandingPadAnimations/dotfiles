@@ -1,0 +1,4 @@
+rocks_descriptions=( ${(Q)"${(z)$(<<\EO:rocks_descriptions
+'File System Library for the Lua Programming Language' 'Tiny library for shell scripting with Lua'
+EO:rocks_descriptions
+)}"} )

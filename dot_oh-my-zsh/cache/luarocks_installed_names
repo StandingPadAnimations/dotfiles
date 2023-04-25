@@ -1,0 +1,4 @@
+rocks_names=( ${(Q)"${(z)$(<<\EO:rocks_names
+'luafilesystem' 'luash'
+EO:rocks_names
+)}"} )

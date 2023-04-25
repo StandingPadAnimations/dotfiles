@@ -1,0 +1,2 @@
+user_config_path='/home/mahid/.luarocks/config-5.4.lua'
+system_config_path='/usr/local/etc/luarocks/config-5.4.lua'

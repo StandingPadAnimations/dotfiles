@@ -1,0 +1,4 @@
+rocks_list=( ${(Q)"${(z)$(<<\EO:rocks_list
+'luafilesystem' '1.8.0-1' 'installed' '/home/mahid/.luarocks/lib/luarocks/rocks-5.4' 'luash' 'scm-0' 'installed' '/home/mahid/.luarocks/lib/luarocks/rocks-5.4'
+EO:rocks_list
+)}"} )

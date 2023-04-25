@@ -1,0 +1,3 @@
+configured_lua_version='5.4'
+configured_user_tree='/home/mahid/.luarocks'
+configured_system_tree='/usr/local'

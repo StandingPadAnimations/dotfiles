@@ -1,0 +1,4 @@
+rocks_versions=( ${(Q)"${(z)$(<<\EO:rocks_versions
+'1.8.0-1' 'scm-0'
+EO:rocks_versions
+)}"} )
