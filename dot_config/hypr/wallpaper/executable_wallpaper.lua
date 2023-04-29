@@ -12,11 +12,19 @@ local wallpaper_path = "/home/mahid/.config/hypr/wallpaper"
 
 -- Lock file to prevent multiple instances. We use LFS here
 -- because it's a lot easier and works properly compared to 
--- using some mkdir or flock workaround
+-- using some mkdir or flock workaround. If the file still exists, we'll
+-- loop and send a notification every 15 seconds to alert future me.
+--
+-- We do it before the Ctrl+C signal thing so that it doesn't interfere with it
 local lock_file = lfs.lock_dir(wallpaper_path, 2)
-if not lock_file then
-	print("Lock file exists!")
-	return
+while true do
+	if not lock_file then
+		local notify_send = sh.command('notify-send')
+		notify_send("Wallpaper script: rm the file")
+	else
+		break
+	end
+	socket.sleep(15)
 end
 
 -- Signal to handle Ctrl+C so that we delete the lock file. I 
@@ -33,19 +41,32 @@ local function wallpaper_loop()
 	local transition_step = 20
 	local interval = 5
 	local positions = {"top-right", "top-left", "bottom-right", "bottom-left"}
+	local last_modified = nil
+	local imgs = {}
 
 	-- Multi-part commands
 	local swww_img = sh.command('swww', 'img')
 
-	-- Get random image
+	-- Get a random image file path
 	local function get_image()
-		local imgs = {}
-		for file in lfs.dir(wallpaper_path) do
-			local ext = file:match('^.+(%..+)$')
-			if ext == ".png" or ext == ".jpg" then
-				table.insert(imgs, wallpaper_path.."/"..file)
+		-- If starting the script or the folder has been modified, then refresh all of the files
+		-- so that we have a fresh set of images. We do it like this because it's faster
+		local temp_last_modified = lfs.attributes(wallpaper_path, 'modification')
+		if last_modified == nil or temp_last_modified > last_modified then
+			imgs = {}
+			last_modified = temp_last_modified
+
+			-- Go through every file, check the extension, and if it's an image, add
+			-- it to the imgs table
+			for file in lfs.dir(wallpaper_path) do
+				local ext = file:match('^.+(%..+)$')
+				if ext == ".png" or ext == ".jpg" then
+					table.insert(imgs, wallpaper_path.."/"..file)
+				end
 			end
 		end
+
+		-- Select a random image and return it
 		return imgs[math.random(#imgs)]
 	end
 
