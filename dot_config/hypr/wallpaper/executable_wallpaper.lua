@@ -88,7 +88,7 @@ local ok, res = pcall(wallpaper_loop)
 if ok then
 	print("YAY")
 else
-	io.output(wallpaper_loop.."/error.txt")
+	io.output(wallpaper_path.."/error.txt")
 	io.write(res)
 
 	-- Free the file if there's an error
