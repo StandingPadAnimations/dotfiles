@@ -42,6 +42,7 @@ local function wallpaper_loop()
 	local interval = 5
 	local positions = {"top-right", "top-left", "bottom-right", "bottom-left"}
 	local last_modified = nil
+	local iterations = 0
 	local imgs = {}
 
 	-- Multi-part commands
@@ -92,6 +93,15 @@ local function wallpaper_loop()
 			'--transition-pos', pos,
 			'--transition-fps', transition_fps,
 			'--transition-step', transition_step)
+		iterations = iterations + 1
+
+		-- I choose 50 for no reason other then why not lol
+		if iterations == 50 then
+			-- Let's also set the random seed to make it even more random
+			math.randomseed(os.time())
+			iterations = 0
+			math.random() -- to make sure all future numbers are random
+		end
 		socket.sleep(interval)
 	end
 end
