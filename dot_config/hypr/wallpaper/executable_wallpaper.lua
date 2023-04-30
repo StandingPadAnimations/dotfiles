@@ -8,23 +8,28 @@ local lfs = require('lfs')
 sh.install()
 
 -- Wallpaper path to make my life easier
-local wallpaper_path = "/home/mahid/.config/hypr/wallpaper"
+local wallpaper_path = '/home/mahid/.config/hypr/wallpaper'
 
 -- Lock file to prevent multiple instances. We use LFS here
 -- because it's a lot easier and works properly compared to 
--- using some mkdir or flock workaround. If the file still exists, we'll
--- loop and send a notification every 15 seconds to alert future me.
+-- using some mkdir or flock workaround. If the file still exists, then
+-- check to see if there's multiple processes running. If not, then remove the lockfile,
+-- otherwise delete
 --
 -- We do it before the Ctrl+C signal thing so that it doesn't interfere with it
 local lock_file = lfs.lock_dir(wallpaper_path, 2)
-while true do
-	if not lock_file then
-		local notify_send = sh.command('notify-send')
-		notify_send("Wallpaper script: rm the file")
+if not lock_file then
+	local processes = pgrep('-lf', 'wallpaper.lua')
+	local _, count = tostring(processes):gsub("wallpaper.lua", "")
+	print(count)
+	if count > 1 then
+		print('Already running!')
+		return
 	else
-		break
+		-- LFS gurantees that the file will be called lockfile.lfs
+		rm(wallpaper_path..'/lockfile.lfs')
+		lock_file = lfs.lock_dir(wallpaper_path, 2)
 	end
-	socket.sleep(15)
 end
 
 -- Signal to handle Ctrl+C so that we delete the lock file. I 
@@ -40,7 +45,7 @@ local function wallpaper_loop()
 	local transition_fps = 60
 	local transition_step = 20
 	local interval = 5
-	local positions = {"top-right", "top-left", "bottom-right", "bottom-left"}
+	local positions = {'top-right', "top-left", "bottom-right", "bottom-left"}
 	local last_modified = nil
 	local iterations = 0
 	local imgs = {}
@@ -61,8 +66,8 @@ local function wallpaper_loop()
 			-- it to the imgs table
 			for file in lfs.dir(wallpaper_path) do
 				local ext = file:match('^.+(%..+)$')
-				if ext == ".png" or ext == ".jpg" then
-					table.insert(imgs, wallpaper_path.."/"..file)
+				if ext == '.png' or ext == ".jpg" then
+					table.insert(imgs, wallpaper_path..'/'..file)
 				end
 			end
 		end
@@ -117,9 +122,9 @@ socket.sleep(1)
 -- Lua not wanting to execute
 local ok, res = pcall(wallpaper_loop)
 if ok then
-	print("YAY")
+	print('YAY')
 else
-	io.output(wallpaper_path.."/error.txt")
+	io.output(wallpaper_path..'/error.txt')
 	io.write(res)
 
 	-- Free the file if there's an error
