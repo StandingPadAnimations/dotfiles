@@ -44,7 +44,7 @@ local function wallpaper_loop()
 	-- Constants
 	local transition_fps = 60
 	local transition_step = 20
-	local interval = 5
+	local interval = 30
 	local positions = {'top-right', "top-left", "bottom-right", "bottom-left"}
 	local last_modified = nil
 	local iterations = 0

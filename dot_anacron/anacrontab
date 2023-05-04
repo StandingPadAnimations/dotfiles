@@ -1,10 +1,7 @@
-~/.anacron/anacrontab
-------------------------------------------------------
-
 SHELL=/bin/sh
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/home/mahid/bin
-HOME=/home/user
-LOGNAME=user
+HOME=/home/mahid
+LOGNAME=mahid
 
 # period  delay  job-id  command
 1  5   user.cron.daily    nice run-parts /home/mahid/.anacron/cron.daily

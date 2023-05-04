@@ -4,7 +4,11 @@
 -- See the kickstart.nvim README for more information
 return {
 	"windwp/nvim-autopairs",
-
+	{
+		"kaarmu/typst.vim",
+		ft = 'typst',
+		lazy = false,
+	},
 	config = function()
     		require("nvim-autopairs").setup {}
 		vim.keymap.set("n", "<leader>ga", ":Git add")
