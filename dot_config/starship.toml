@@ -60,6 +60,7 @@ format = """\
 
 # Timeout for starship to scan files (in milliseconds)
 scan_timeout = 30
+command_timeout = 10000
 
 # Add a new line before the start of the prompt
 add_newline = true

@@ -30,11 +30,9 @@ ShowInstallerIsoInfo() {
     fi
 }
 
-alias ls="lsd"
-alias ls-tree="lsd --all --tree"
-alias ls-all="lsd --all"
+alias exa="exa -aghHlG"
 alias cat="bat"
-alias yeet="sudo aura -Rs"
+alias yeet="sudo pacman -Rns"
 
 [[ "$(whoami)" = "root" ]] && return
 

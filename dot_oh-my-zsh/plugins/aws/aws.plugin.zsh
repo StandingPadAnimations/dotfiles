@@ -180,7 +180,7 @@ function aws_change_access_key() {
   case $yn in
     [Yy]*)
       echo -n "\nDisabling access key ${original_aws_access_key_id}..."
-      if aws --no-cli-pager update-access-key --access-key-id ${original_aws_access_key_id} --status Inactive; then
+      if aws --no-cli-pager iam update-access-key --access-key-id ${original_aws_access_key_id} --status Inactive; then
         echo "done."
       else
         echo "\nFailed to disable ${original_aws_access_key_id} key."
@@ -229,7 +229,7 @@ function aws_prompt_info() {
   fi
 
   if [[ -n $AWS_REGION ]]; then
-    [[ -n $AWS_PROFILE ]] && _aws_to_show+="${ZSH_THEME_AWS_DIVIDER=' '}"
+    [[ -n $AWS_PROFILE ]] && _aws_to_show+="${ZSH_THEME_AWS_DIVIDER=" "}"
     _aws_to_show+="${ZSH_THEME_AWS_REGION_PREFIX="<region:"}${region}${ZSH_THEME_AWS_REGION_SUFFIX=">"}"
   fi
 

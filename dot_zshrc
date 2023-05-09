@@ -103,9 +103,7 @@ source $ZSH/oh-my-zsh.sh
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
-alias ls="lsd"
-alias tree="lsd --all --tree"
-alias ls-all="lsd --all"
+alias exa="exa -aghHlG"
 alias cat="bat"
 alias cd="z"
 alias grep="rg"
@@ -124,6 +122,12 @@ fi
 
 autoload bashcompinit
 bashcompinit
+
+# Poetry
+fpath+=~/.zfunc
+autoload -Uz compinit && compinit
+
+# Profile
 source ~/.profile
 eval "$(atuin init zsh)"
 eval "$(register-python-argcomplete pipx)"
@@ -131,3 +135,4 @@ eval "$(thefuck --alias)"
 # Created by `pipx` on 2023-03-27 22:10:14
 export PATH="$PATH:/home/mahid/.local/bin"
 eval "$(luarocks path)"
+
