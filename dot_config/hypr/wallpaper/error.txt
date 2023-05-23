@@ -1,1 +1,0 @@
-/home/mahid/.luarocks/share/lua/5.4/sh.lua:320: Error: "Failed to connect to socket: Connection refused (os error 111)"

@@ -112,14 +112,16 @@ require('lazy').setup({
     },
   },
 
-  { -- Theme inspired by Atom
-
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
+  { -- Theme inspired by GitHub
+    'projekt0n/github-nvim-theme',
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
-			require("catppuccin").setup {}
-			vim.cmd.colorscheme "catppuccin-mocha"
+      require('github-theme').setup({
+        -- ...
+      })
+
+      vim.cmd('colorscheme github_dark_colorblind')
     end,
   },
 
@@ -129,7 +131,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'catppuccin',
+        theme = 'github_dark_colorblind',
         component_separators = '|',
         section_separators = '',
       },

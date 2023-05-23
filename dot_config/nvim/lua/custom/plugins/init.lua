@@ -9,6 +9,8 @@ return {
 		ft = 'typst',
 		lazy = false,
 	},
+	"NoahTheDuke/vim-just",
+	"sindrets/diffview.nvim",
 	config = function()
     		require("nvim-autopairs").setup {}
 		vim.keymap.set("n", "<leader>ga", ":Git add")
