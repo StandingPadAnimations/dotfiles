@@ -7,6 +7,7 @@
 [user]
 	email = mahidsheikh@pm.me
 	signingkey = 83C7F596A88BE583
+	name = StandingPad Animations
 [commit]
 	gpgsign = true
 	verbose = true
@@ -16,7 +17,7 @@
 
 [core]
     pager = delta
-	editor = nvim
+    editor = nvim
 
 [interactive]
     diffFilter = delta --color-only
@@ -30,15 +31,27 @@
 
 [diff]
     colorMoved = default
+    tool = meld
+
+[difftool]
+    prompt = false
+
+[difftool "meld"]
+    cmd = meld "$LOCAL" "$REMOTE"
+
+[merge]
+    tool = meld
+
+[mergetool "meld"]
+    cmd = meld --auto-merge "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED" --label "MERGE (REMOTE BASE MY)"
+    trustExitCode = false
+
+[mergetool]
+    prompt = false
+    keepBackup = false
+
 [url "git@github.com:"]
     insteadOf = https://github.com/
 
-# avoid issues where the cargo-edit tool tries to clone from a repo you do not have WRITE access to.
-# we already use SSH for every github repo, and so this puts the clone back to using HTTPS.
-[url "https://github.com/rust-lang/crates.io-index"]
-  insteadOf = https://github.com/rust-lang/crates.io-index
-
-# avoid issues where the `cargo audit` command tries to clone from a repo you do not have WRITE access to.
-# we already use SSH for every github repo, and so this puts the clone back to using HTTPS.
-[url "https://github.com/RustSec/advisory-db"]
-  insteadOf = https://github.com/RustSec/advisory-db
+[pull]
+	rebase = true

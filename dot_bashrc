@@ -50,3 +50,4 @@ alias pacdiff=eos-pacdiff
 
 eval "$(starship init bash)"
 eval "$(luarocks path)"
+

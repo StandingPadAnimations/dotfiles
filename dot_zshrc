@@ -70,72 +70,46 @@ DISABLE_MAGIC_FUNCTIONS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man-pages rust)
+plugins=(git colored-man-pages per-directory-history zsh-smartcache)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
-
-alias ls="exa -aghHlG --icons"
+# Aliases
 alias cat="bat"
 alias cd="z"
 alias grep="rg -C 2"
 alias yeet="sudo pacman -Rsc"
 alias mutt="neomutt"
+alias ls="exa -aghHlG --icons"
+alias s="kitty +kitten ssh"
+alias db="distrobox"
 
-[ "$TERM" = "xterm-256color" ]
-
-. "$HOME/.cargo/env"
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-
+# Execute Bash in TTY
+# This is just as additional caution
+# as I mess with Zsh a lot and want
+# TTY to keep using Bash
 if [ `tput colors` != "256" ]; then
   exec bash -l;
 fi
 
-autoload bashcompinit
-bashcompinit
-
-# Poetry
+# Autocompletions
 fpath+=~/.zfunc
-autoload -Uz compinit && compinit
+smartcache comp bashcompinit
 
-# Profile
-source ~/.profile
-eval "$(atuin init zsh)"
+# Some more plugins and stuff
+# that come from system packages
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Commands to be executed, most 
+# are cached to make startup faster
+smartcache eval starship init zsh
+eval $(thefuck --alias)
+smartcache eval luarocks path
+smartcache eval pyenv init -
+eval "$(zoxide init zsh)"
 eval "$(register-python-argcomplete pipx)"
-eval "$(thefuck --alias)"
-# Created by `pipx` on 2023-03-27 22:10:14
-export PATH="$PATH:/home/mahid/.local/bin"
-eval "$(luarocks path)"
 
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+. "$HOME/.ghcup/env"

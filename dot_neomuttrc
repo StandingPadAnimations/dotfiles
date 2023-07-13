@@ -30,7 +30,8 @@ macro index gs "<change-folder>$record<enter>" "go to sent"
 macro index gi "<change-folder>$spoolfile<Enter>" "go to inbox"
 macro index gt "<change-folder>$trash<enter>" "go to trash"
 macro index,pager A "<save-message> =Archive<enter> "archive message"
-
+macro compose \e5 "F pandoc -s -f markdown -t html \ny^T^Utext/html; charset=utf-8\n"
+set wait_key=no
 
 # Some extra stuff
 set editor="nvim"

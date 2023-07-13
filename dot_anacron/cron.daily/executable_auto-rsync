@@ -1,3 +1,3 @@
 #!/usr/bin/bash
 
-pass show Remote/rsync | sshpass rsync -avzP --delete --delete-excluded --exclude-from="$HOME/.anacron/cron.daily/rsync-homedir-excludes.txt" /home mahid@192.168.1.6::NetBackup
+pass show Remote/rsync | sshpass rsync -avzhP --delete --delete-excluded --exclude-from="$HOME/.anacron/cron.daily/rsync-homedir-excludes.txt" /home mahid@192.168.1.6::NetBackup

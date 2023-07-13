@@ -448,3 +448,15 @@ mcprep_venv_*
 # Compiled language stuff
 target/
 go/
+
+Documents/WarithGPT
+.cabal
+.ghcup
+.stack
+.flatpak-builder
+build-dir
+.local/share/nvim
+/home/mahid/Unity
+/home/mahid/.local/share/endless-sky/plugins/endless-sky-high-dpi-0.10.1.zip
+/home/mahid/.local/share/flatpak/repo
+/home/mahid/.local/share/containers
